@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper{
+    text-align: center;
+    margin: 3rem auto;
+}
+.container{
+    max-width: 1200px;
+    margin: 3rem auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell{
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light_blue{
+    background-color: lightblue;
+}
