@@ -77,10 +77,13 @@ generateElement.addEventListener("click", function () {
                     for (let j = 0; j < cellList.length; j++) {
                         //selezione la cella singola per ogni j nella lista
                         const thisCell = cellList[j];
+                        thisCell.style.pointerEvents = "none";
                         //confronto cella e bomba e se sonmo uguali applico la classe red
                         if(thisCell.innerHTML == bomb){
                             thisCell.classList.add('red');
                             const resultEL = document.querySelector(".risultato");
+                            //La partita termina quando il giocatore clicca su una bomba
+                            /*Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba. */
                             resultEL.innerHTML = (`Mi spiace hai perso, il tuo risultato è ${counterPoints}`);   
                         }
                     }
@@ -90,7 +93,16 @@ generateElement.addEventListener("click", function () {
                 counterPoints++;
                 if (counterPoints === (maxCellsNumb - 16)){
                     const resultEL = document.querySelector(".risultato");
+                    /*  o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe). */
+                    /*Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba. */
                     resultEL.innerHTML = (`Complimenti! Hai finito il gioco, il tuo risultato è ${counterPoints}`); 
+                    const cellList = document.querySelectorAll('.cell');
+                    for (let i = 0; i < cellList.length; i++) {
+                        //selezione la cella singola per ogni j nella lista
+                        const thisCell = cellList[i];
+                        //blocco il click
+                        thisCell.style.pointerEvents = "none";
+                    }
                 } 
             }
             
@@ -104,9 +116,7 @@ generateElement.addEventListener("click", function () {
 
 
 
-/* 
-La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
-Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba. */
+
 
 
 //Functions
