@@ -57,7 +57,7 @@ generateElement.addEventListener("click", function () {
         }
     }
     console.log(bombs);
-
+    let counterPoints = 0
     for (let i = 0; i < maxCellsNumb; i++) {
         const cell = divGenerator(i + 1);
         cell.style.setProperty("width", `calc(100% / ${rowLenght})`);
@@ -69,17 +69,29 @@ generateElement.addEventListener("click", function () {
         cell.addEventListener("click", function () {
             if (bombs.includes(Number(cell.innerHTML))) {
                 for (let i = 0; i < bombs.length; i++) {
+                    //seleziono la bomba singola per ogni i nell'array
                     const bomb = bombs[i];
+                    //console.log(bomb);
+                    //selezione tutte le celle con classe cell
                     const cellList = document.querySelectorAll('.cell');
                     for (let j = 0; j < cellList.length; j++) {
+                        //selezione la cella singola per ogni j nella lista
                         const thisCell = cellList[j];
+                        //confronto cella e bomba e se sonmo uguali applico la classe red
                         if(thisCell.innerHTML == bomb){
                             thisCell.classList.add('red');
+                            const resultEL = document.querySelector(".risultato");
+                            resultEL.innerHTML = (`Mi spiace hai perso, il tuo risultato è ${counterPoints}`);   
                         }
                     }
                 }        
             } else {
                 cell.classList.add("light_blue");
+                counterPoints++;
+                if (counterPoints === (maxCellsNumb - 16)){
+                    const resultEL = document.querySelector(".risultato");
+                    resultEL.innerHTML = (`Complimenti! Hai finito il gioco, il tuo risultato è ${counterPoints}`); 
+                } 
             }
             
         })
@@ -89,9 +101,7 @@ generateElement.addEventListener("click", function () {
 }
 );
 
-// se la partita termina allora tutte le celle che contengono bomb si colorano di rosso
-//seleziono tutte le celle con bomb
-// applico a tutte queste la classe "red"
+
 
 
 /* 
