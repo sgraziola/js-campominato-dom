@@ -58,35 +58,40 @@ generateElement.addEventListener("click", function () {
     }
     console.log(bombs);
 
-    
     for (let i = 0; i < maxCellsNumb; i++) {
         const cell = divGenerator(i + 1);
         cell.style.setProperty("width", `calc(100% / ${rowLenght})`);
         containerElement.insertAdjacentElement("beforeend", cell);
         
-        const cellBombs = [];
-        for (let j = 0; j < bombs.length; j++) {
-            if (bombs.includes(Number(cell.innerHTML))) {
-                cellBombs.push(cell);
-                console.log(cellBombs);
-            }
-        }
-        console.log(cellBombs);
+
         /* In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle. */
+        
         cell.addEventListener("click", function () {
-            if (!bombs.includes(Number(cell.innerHTML))) {
-                cell.classList.add("light_blue");
-                console.log(cell.innerText);
+            if (bombs.includes(Number(cell.innerHTML))) {
+                for (let i = 0; i < bombs.length; i++) {
+                    const bomb = bombs[i];
+                    const cellList = document.querySelectorAll('.cell');
+                    for (let j = 0; j < cellList.length; j++) {
+                        const thisCell = cellList[j];
+                        if(thisCell.innerHTML == bomb){
+                            thisCell.classList.add('red');
+                        }
+                    }
+                }        
             } else {
-                cell.classList.add("red");
-                console.log(cell.innerText);
+                cell.classList.add("light_blue");
             }
+            
         })
+
     }
+
 }
 );
 
 // se la partita termina allora tutte le celle che contengono bomb si colorano di rosso
+//seleziono tutte le celle con bomb
+// applico a tutte queste la classe "red"
 
 
 /* 
